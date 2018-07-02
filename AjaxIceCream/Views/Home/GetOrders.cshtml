@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AjaxIceCream.Data.IceCream>
+
+<div class="row">
+    <div class="col-md-9 col-md-offset-1">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>Order</th>
+                <th>Change</th>
+            </tr>
+            @foreach (AjaxIceCream.Data.IceCream ice in Model)
+            {
+                <tr>
+                @if (!ice.LowFat)
+                {
+                    <td data-lowfat=false>@ice.Flavor</td>
+                }
+                else
+                {
+                    <td data-lowfat=true>@ice.Flavor <span class="glyphicon glyphicon-star" aria-hidden="true"></span> </td>
+                }
+                    <td><button data-id="@ice.Id" class="btn btn-warning edit">Edit</button> &nbsp; <button data-id="@ice.Id" class="btn btn-danger delete">Delete</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="flavor" />
+                <br />
+                <div class="form-check">
+                    <label>Low Fat</label>
+                    <input type="checkbox" id="lowfat">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/getorders.js"></script>
+    }
